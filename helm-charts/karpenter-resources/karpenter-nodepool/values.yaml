@@ -1,0 +1,31 @@
+ec2NodeClass:
+  name: default
+  kubelet:
+    podsPerCore: 2
+    maxPods: 29
+    systemReserved:
+      cpu: "100m"
+      memory: "200Mi"
+      ephemeralStorage: "1Gi"
+  role:
+  amiSelectorTerms:
+    id: ""
+  securityGroupSelectorTerm: 
+    tags:
+     karpenter.sh/discovery: ""
+  subnetSelectorTerms:
+    tags:
+      karpenter.sh/discovery: ""
+  tags:
+    karpenter.sh/discovery: ""
+
+nodePool:
+  requirements:
+    instanceCpu: ["2", "4", "8"]
+    arch: ["amd64"]
+    os: ["linux"]
+    capacityType: ["spot", "on-demand"]
+    instanceCategory: ["c", "m", "r", "t"]
+    instanceGeneration: ["3"]
+  limits:
+    cpu: "1000"

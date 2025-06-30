@@ -1,0 +1,4 @@
+apiVersion: v2
+name: karpenter-nodepool
+description: A Helm chart for Karpenter resources
+version: 1.0.0
