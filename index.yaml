@@ -7,6 +7,6 @@ entries:
     digest: 2155b0bfb3869d7947c049858c21b4bb0147ba381e5e41e8ee42b8a6e0786c2c
     name: karpenter-nodepool
     urls:
-    - https://CloudOpsDemos/karpenter-nodepool/karpenter-nodepool-1.0.0.tgz
-    version: 1.0.0
+    - https://CloudOpsDemos.github.io/karpenter-nodepool/karpenter-nodepool-1.0.2.tgz
+    version: 1.0.2
 generated: "2025-06-30T19:09:17.257298+02:00"

@@ -1,0 +1,25 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: {{ .Values.ec2NodeClass.name }}
+  namespace: {{ .Values.ec2NodeClass.namespace }}
+spec:
+  kubelet:
+    podsPerCore: {{ .Values.ec2NodeClass.kubelet.podsPerCore }}
+    maxPods: {{ .Values.ec2NodeClass.kubelet.maxPods }}
+    systemReserved:
+      cpu: {{ .Values.ec2NodeClass.kubelet.systemReserved.cpu }}
+      memory: {{ .Values.ec2NodeClass.kubelet.systemReserved.memory }}
+      ephemeral-storage: {{ .Values.ec2NodeClass.kubelet.systemReserved.ephemeralStorage }}
+  role: {{ .Values.ec2NodeClass.role | quote }}
+  amiFamily: {{ .Values.ec2NodeClass.amiFamily | quote }}
+  amiSelectorTerms:
+    - id: {{ .Values.ec2NodeClass.amiSelectorTerms.id | quote }}
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: {{ .Values.ec2NodeClass.karpenterDiscovery | quote }}
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: {{ .Values.ec2NodeClass.karpenterDiscovery | quote }}
+  tags: 
+    karpenter.sh/discover: {{ .Values.ec2NodeClass.karpenterDiscovery | quote }}

@@ -1,0 +1,41 @@
+ec2NodeClass:
+  name: "default"
+  namespace: "karpenter"
+  kubelet:
+    podsPerCore: 2
+    maxPods: 29
+    systemReserved:
+      cpu: "200m"
+      memory: "250Mi"
+      ephemeralStorage: "1Gi"
+  role: "thebestone"
+  amiSelectorTerms:
+    id: "ami-0ab8b9aed40e77e9e"
+  amiFamily: "AL2"
+  karpenterDiscovery: ""
+
+nodePool:
+  name: "default"
+  namespace: "karpenter"
+  expireAfter: "48h"
+  requirements:
+    - key: karpenter.k8s.aws/instance-cpu
+      operator: In
+      values: ["4"]
+    - key: kubernetes.io/arch
+      operator: In
+      values: ["amd64"]
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: ["on-demand"]
+    - key: karpenter.k8s.aws/instance-category
+      operator: In
+      values: ["c", "r"]
+    - key: karpenter.k8s.aws/instance-generation
+      operator: Gt
+      values: ["3"]
+  limits:
+    cpu: "1000"
